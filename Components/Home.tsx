@@ -7,6 +7,7 @@ import SearchTab from "./SearchTab";
 const Home = () => {
   const [open, setOpen] = useState(false);
 
+
   return (
     <View style={styles.container}>
       <SearchTab />

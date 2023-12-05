@@ -9,7 +9,7 @@ const SearchTab = () => {
     <Searchbar
       placeholder="Search"
       onChangeText={onChangeSearch}
-      value={search}></Searchbar>
+      value={search}/>
   );
 };
 export default SearchTab;

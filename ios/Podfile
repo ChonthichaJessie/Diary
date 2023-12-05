@@ -5,6 +5,11 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
+# * * * * * New added * * * * * 
+use_modular_headers!
+$RNFirebaseAsStaticFramework = true
+# * * * * * New added * * * * * 
+
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
@@ -17,7 +22,8 @@ prepare_react_native_project!
 #   dependencies: {
 #     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
 # ```
-flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+# flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+flipper_config = FlipperConfiguration.disabled
 
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
@@ -30,6 +36,27 @@ target 'DiaryFront01' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
+
+# * * * * * New added * * * * * 
+  # pod 'Firebase', :modular_headers => true
+  # pod 'FirebaseCoreInternal', :modular_headers => true
+  # pod 'GoogleUtilities', :modular_headers => true
+  # pod 'FirebaseCore', :modular_headers => true
+  # pod 'FirebaseCoreExtension', :modular_headers => true
+  # pod 'FirebaseInstallations', :modular_headers => true
+  # pod 'GoogleDataTransport', :modular_headers => true
+  # pod 'nanopb', :modular_headers => true
+  # pod 'leveldb-library', :modular_headers => true
+  # pod 'FirebaseAppCheckInterop', :modular_headers => true
+  # pod 'FirebaseAuthInterop', :modular_headers => true
+  # pod 'GTMSessionFetcher', :modular_headers => true
+  # pod 'FirebaseStorage', :modular_headers => true
+# * * * * * New added * * * * * 
+
+# # * * * * * New added * * * * * 
+use_frameworks! :linkage => :static
+$RNFirebaseAsStaticFramework = true
+# # * * * * * New added * * * * * 
 
   use_react_native!(
     :path => config[:reactNativePath],

@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import GreetingText from "./Greetingtext";
-import Diary from "./Diary";
-import SearchTab from "./SearchTab";
+import React, {useState} from 'react';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import GreetingText from './Greetingtext';
+import Diary from './Diary';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
 
-
   return (
     <View style={styles.container}>
-      <SearchTab />
       <GreetingText />
       {open ? (
-        <Diary />
+        <>
+          <Diary />
+          <TouchableOpacity onPress={() => setOpen(false)}>
+            <Text>Home</Text>
+          </TouchableOpacity>
+        </>
       ) : (
         <TouchableOpacity onPress={() => setOpen(true)}>
           <Text>+</Text>
@@ -28,8 +30,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

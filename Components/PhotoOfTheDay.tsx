@@ -3,11 +3,12 @@ import {Image, View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {Asset, launchImageLibrary} from 'react-native-image-picker';
 
 type Props = {
+  disabled?: boolean;
   image?: {uri?: string};
   onPick(image: Asset): void;
 };
 
-const PhotoOfTheDay = ({onPick, image}: Props) => {
+const PhotoOfTheDay = ({onPick, image, disabled}: Props) => {
   const pickImage = async () => {
     const result = await launchImageLibrary({mediaType: 'photo'});
     if (!result.didCancel && result.assets?.[0]?.uri) {
@@ -22,7 +23,7 @@ const PhotoOfTheDay = ({onPick, image}: Props) => {
       )}
       <View style={imageUploaderStyles.uploadBtnContainer}>
         <TouchableOpacity
-          disabled={!!image}
+          disabled={disabled}
           onPress={pickImage}
           style={imageUploaderStyles.uploadBtn}>
           <Text>Upload Photo</Text>

@@ -1,0 +1,97 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/AmaticSC-Bold.ttf",
+      "sha1": "845b7ea45a082b12bebd77a16d2cfb671892de1c"
+    },
+    {
+      "path": "assets/fonts/AmaticSC-Regular.ttf",
+      "sha1": "9aa9f1b9ddbd8340e415b538c513ee2ab92ee2e2"
+    },
+    {
+      "path": "assets/fonts/DancingScript-Bold.ttf",
+      "sha1": "40e545d9cdad467a919c2a38c032bc4fdb69c01f"
+    },
+    {
+      "path": "assets/fonts/DancingScript-Medium.ttf",
+      "sha1": "575d42d95b4b562cbd91341e61ab754386ffeadd"
+    },
+    {
+      "path": "assets/fonts/DancingScript-Regular.ttf",
+      "sha1": "77b7bf804974618d28d7b73c79ea5d34c82cb704"
+    },
+    {
+      "path": "assets/fonts/DancingScript-SemiBold.ttf",
+      "sha1": "3d2e9198ccd497e0ccaf29b53cd2e4e9063dc78a"
+    },
+    {
+      "path": "assets/fonts/DancingScript-VariableFont_wght.ttf",
+      "sha1": "80f13e7575ec59a51b7fdc42bb0b9d7a34439123"
+    },
+    {
+      "path": "assets/fonts/Pacifico-Regular.ttf",
+      "sha1": "baca1fca7fe74b61cb33aa0da48ec1a3a77bcf49"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-Black.ttf",
+      "sha1": "de7806872f91b97727c78796ece1365a4ccb1c1a"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-BlackItalic.ttf",
+      "sha1": "44db7ef2642b98b9807ed23962bec64432ba8d40"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-Bold.ttf",
+      "sha1": "833c2b70c742b12b1be9461480c8853ddb663991"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-BoldItalic.ttf",
+      "sha1": "a46a0db1e4a946fd622df9286149b861081ae3c8"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-ExtraBold.ttf",
+      "sha1": "a3ef318fa4be7090a26f201bbc8bfc8ebbec734b"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-ExtraBoldItalic.ttf",
+      "sha1": "038ac6ab8ecbaa24a4e2e3186ff3a17e38cbf593"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf",
+      "sha1": "e56ffe27d31f8d13499b8d3aa5f00fdfed15da0e"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-Italic.ttf",
+      "sha1": "466021d7e599a75fadea7bc5f0d4f0cb679849aa"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-Medium.ttf",
+      "sha1": "0670023e90cdb6819b62ee4c60856e9a07bafd13"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-MediumItalic.ttf",
+      "sha1": "35616fb869f4b8a7d78469746beeba553490876b"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-Regular.ttf",
+      "sha1": "27948bdf40b983e7e7405ae9dc101abc0c455c99"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-SemiBold.ttf",
+      "sha1": "34e3b5e50340b6b1c5aff95c9202cfe662fd1d82"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-SemiBoldItalic.ttf",
+      "sha1": "b55f9f0b3fb199d6f5c5f3495924272ffadb70c5"
+    },
+    {
+      "path": "assets/fonts/PlayfairDisplay-VariableFont_wght.ttf",
+      "sha1": "72c45479fe155703447ddcde60289724b826d24d"
+    },
+    {
+      "path": "assets/fonts/Sacramento-Regular.ttf",
+      "sha1": "bb942772a1f61c2f6cc0f980a9da39f1fc602d00"
+    }
+  ]
+}

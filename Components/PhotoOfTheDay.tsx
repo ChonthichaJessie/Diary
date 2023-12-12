@@ -26,7 +26,7 @@ const PhotoOfTheDay = ({onPick, image, disabled}: Props) => {
           disabled={disabled}
           onPress={pickImage}
           style={imageUploaderStyles.uploadBtn}>
-          <Text>Upload Photo</Text>
+          <Text>Select Photo</Text>
           {/* <AntDesign name="camera" size={20} color="black" /> */}
         </TouchableOpacity>
       </View>

@@ -1,6 +1,7 @@
 import React from 'react-native';
 import Home from './Components/Home';
 
+
 const App = () => {
   return <Home />;
 };

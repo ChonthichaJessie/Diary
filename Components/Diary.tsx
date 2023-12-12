@@ -1,17 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Button,
-  Alert,
-} from 'react-native';
+import {Alert, ActivityIndicator} from 'react-native';
 import PhotoOfTheDay from './PhotoOfTheDay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import storage, {FirebaseStorageTypes} from '@react-native-firebase/storage';
 import {Asset} from 'react-native-image-picker';
+import styled from 'styled-components/native';
 
 type DiaryDoc = {
   date: string;
@@ -82,6 +76,7 @@ const Diary = () => {
     setSelfDesc('');
     setImage(undefined);
     setIsSaved(false);
+    setIsSaving(false);
   }, []);
 
   const checkOldDiary = useCallback(async () => {
@@ -103,6 +98,7 @@ const Diary = () => {
       setImage({uri: imageUri});
       setIsSaved(true);
     } catch (e) {
+      Alert.alert('Error saving');
       reset();
     }
     setIsSaving(false);
@@ -114,38 +110,99 @@ const Diary = () => {
 
   return (
     <>
-      <View>
-        <Text>Story date</Text>
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode="date"
-          is24Hour
-          //Unchanging contents while saving diary
-          disabled={isSaving}
-          onChange={e => setDate(new Date(e.nativeEvent.timestamp))}
-        />
-        <TextInput
+      <ContentWrapper>
+        <StoryDateContent>
+          <FlexBox1>
+            <TextContent>Story date</TextContent>
+          </FlexBox1>
+          <FlexBox2>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="date"
+              is24Hour
+              //Unchanging contents while saving diary
+              disabled={isSaving}
+              onChange={e => setDate(new Date(e.nativeEvent.timestamp))}
+            />
+          </FlexBox2>
+        </StoryDateContent>
+        <SelfDescContent
           value={selfDesc}
           onChangeText={selfDesc => setSelfDesc(selfDesc)}
           //Unchanging contents while saving diary
           editable={!isSaving}
           placeholder="Self Descriptive for Today"
         />
-        <TextInput
+        <DiaryContent
           onChangeText={text => setText(text)}
           value={text}
-          placeholder="Start telling the good things here!!!"
+          placeholder="Start telling the good things here~"
           //Unchanging contents while saving diary
           editable={!isSaving}
+          multiline
         />
-      </View>
+      </ContentWrapper>
       <PhotoOfTheDay onPick={setImage} image={image} disabled={isSaving} />
-      <TouchableOpacity onPress={saveToFb} disabled={isSaving}>
-        <Text>{isSaved ? 'Save edited diary' : 'Save diary'}</Text>
-      </TouchableOpacity>
+      <FinalButton onPress={saveToFb} disabled={isSaving}>
+        {isSaving && <ActivityIndicator size="small" color="gray" />}
+        <FinalButtonText>
+          {isSaved ? 'Save edited diary' : 'Save diary'}
+        </FinalButtonText>
+      </FinalButton>
     </>
   );
 };
 
 export default Diary;
+const ContentWrapper = styled.View`
+  align-items: stretch;
+  width: 70%;
+`;
+
+const TextContent = styled.Text`
+  font-size: 30px;
+  color: white;
+  font-family: 'AmaticSC-Bold';
+`;
+
+const StoryDateContent = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+`;
+
+const FlexBox1 = styled.View`
+  display: flex;
+`;
+
+const FlexBox2 = styled.View`
+  display: flex;
+`;
+
+const SelfDescContent = styled.TextInput`
+  margin-bottom: 10px;
+  border: 1px gray;
+  padding: 5px;
+  margin-bottom: 20px;
+`;
+
+const DiaryContent = styled.TextInput`
+  margin-bottom: 10px;
+  border: 1px gray;
+  height: 120px;
+  padding: 5px;
+  margin-bottom: 20px;
+`;
+
+const FinalButton = styled.TouchableOpacity`
+  flex-direction: row;
+`;
+
+const FinalButtonText = styled.Text`
+  font-size: 30px;
+  color: white;
+  font-family: 'AmaticSC-Bold';
+  margin: 20px;
+`;

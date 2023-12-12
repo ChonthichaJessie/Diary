@@ -1,37 +1,47 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import GreetingText from './Greetingtext';
 import Diary from './Diary';
+import styled from 'styled-components/native';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <GreetingText />
+    <Wrapper>
+      <Header>
+        <GreetingText />
+      </Header>
+
       {open ? (
         <>
           <Diary />
-          <TouchableOpacity onPress={() => setOpen(false)}>
-            <Text>Home</Text>
-          </TouchableOpacity>
+          {/* <TouchableOpacity onPress={() => setOpen(false)}>
+            <Header>Home</Header>
+          </TouchableOpacity> */}
         </>
       ) : (
         <TouchableOpacity onPress={() => setOpen(true)}>
-          <Text>+</Text>
+          <Header>+</Header>
         </TouchableOpacity>
       )}
-    </View>
+    </Wrapper>
   );
 };
 
 export default Home;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Wrapper = styled.View`
+  flex: 1;
+  background-color: rgb(247, 206, 210);
+  align-items: center;
+  justify-content: center;
+`;
+
+const Header = styled.Text`
+  font-size: 40px;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  font-family: "AmaticSC-Bold";
+`;

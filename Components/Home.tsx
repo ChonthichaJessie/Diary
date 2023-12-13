@@ -3,39 +3,42 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import GreetingText from './Greetingtext';
 import Diary from './Diary';
 import styled from 'styled-components/native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Wrapper>
+    <Page>
+    <KeyboardAwareScrollView
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#f7ced2',
+      }}>
       <Header>
         <GreetingText />
       </Header>
 
       {open ? (
-        <>
           <Diary />
-          {/* <TouchableOpacity onPress={() => setOpen(false)}>
-            <Header>Home</Header>
-          </TouchableOpacity> */}
-        </>
       ) : (
         <TouchableOpacity onPress={() => setOpen(true)}>
           <Header>+</Header>
         </TouchableOpacity>
       )}
-    </Wrapper>
+    </KeyboardAwareScrollView>
+    </Page>
   );
 };
 
 export default Home;
 
-const Wrapper = styled.View`
+const Page = styled.View`
+  background-color: #f7ced2;
   flex: 1;
-  background-color: rgb(247, 206, 210);
-  align-items: center;
-  justify-content: center;
 `;
 
 const Header = styled.Text`
@@ -43,5 +46,7 @@ const Header = styled.Text`
   text-align: center;
   margin: 20px;
   color: white;
-  font-family: "AmaticSC-Bold";
+  font-family: 'AmaticSC-Bold';
 `;
+
+

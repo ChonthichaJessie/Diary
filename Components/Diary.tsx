@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Alert, ActivityIndicator} from 'react-native';
+import {Alert, ActivityIndicator, View} from 'react-native';
 import PhotoOfTheDay from './PhotoOfTheDay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import storage, {FirebaseStorageTypes} from '@react-native-firebase/storage';
 import {Asset} from 'react-native-image-picker';
 import styled from 'styled-components/native';
+
 
 type DiaryDoc = {
   date: string;
@@ -110,7 +111,6 @@ const Diary = () => {
 
   return (
     <>
-      <ContentWrapper>
         <StoryDateContent>
           <FlexBox1>
             <TextContent>Story date</TextContent>
@@ -127,6 +127,7 @@ const Diary = () => {
             />
           </FlexBox2>
         </StoryDateContent>
+        <ContentWrapper>
         <SelfDescContent
           value={selfDesc}
           onChangeText={selfDesc => setSelfDesc(selfDesc)}
@@ -142,19 +143,24 @@ const Diary = () => {
           editable={!isSaving}
           multiline
         />
-      </ContentWrapper>
-      <PhotoOfTheDay onPick={setImage} image={image} disabled={isSaving} />
-      <FinalButton onPress={saveToFb} disabled={isSaving}>
-        {isSaving && <ActivityIndicator size="small" color="gray" />}
-        <FinalButtonText>
-          {isSaved ? 'Save edited diary' : 'Save diary'}
-        </FinalButtonText>
-      </FinalButton>
+        </ContentWrapper>
+        <ButtomView>
+          <PhotoWrap>
+          <PhotoOfTheDay onPick={setImage} image={image} disabled={isSaving} />
+          </PhotoWrap>
+          <FinalButton onPress={saveToFb} disabled={isSaving}>
+            {isSaving && <ActivityIndicator size="small" color="gray" />}
+            <FinalButtonText>
+              {isSaved ? 'Save edited diary' : 'Save diary'}
+            </FinalButtonText>
+          </FinalButton>
+        </ButtomView>
     </>
   );
 };
 
 export default Diary;
+
 const ContentWrapper = styled.View`
   align-items: stretch;
   width: 70%;
@@ -196,7 +202,20 @@ const DiaryContent = styled.TextInput`
   margin-bottom: 20px;
 `;
 
+const ButtomView = styled.View`
+  display: flex;
+  flex-direction: column;
+`;
+
+const PhotoWrap = styled.View`
+justify-content: center;
+  display: flex;
+  flex-direction: row;
+`;
+
 const FinalButton = styled.TouchableOpacity`
+  justify-content: center;
+  display: flex;
   flex-direction: row;
 `;
 

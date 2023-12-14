@@ -1,12 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Alert, ActivityIndicator, View} from 'react-native';
+import {Alert, ActivityIndicator, TouchableOpacity, Text} from 'react-native';
 import PhotoOfTheDay from './PhotoOfTheDay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import storage, {FirebaseStorageTypes} from '@react-native-firebase/storage';
 import {Asset} from 'react-native-image-picker';
 import styled from 'styled-components/native';
-
 
 type DiaryDoc = {
   date: string;
@@ -111,23 +110,20 @@ const Diary = () => {
 
   return (
     <>
-        <StoryDateContent>
-          <FlexBox1>
-            <TextContent>Story date</TextContent>
-          </FlexBox1>
-          <FlexBox2>
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode="date"
-              is24Hour
-              //Unchanging contents while saving diary
-              disabled={isSaving}
-              onChange={e => setDate(new Date(e.nativeEvent.timestamp))}
-            />
-          </FlexBox2>
-        </StoryDateContent>
-        <ContentWrapper>
+      <StoryDateContent>
+        <TextContent>Story date</TextContent>
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode="date"
+          is24Hour
+          //Unchanging contents while saving diary
+          disabled={isSaving}
+          onChange={e => setDate(new Date(e.nativeEvent.timestamp))}
+        />
+      </StoryDateContent>
+
+      <ContentWrapper>
         <SelfDescContent
           value={selfDesc}
           onChangeText={selfDesc => setSelfDesc(selfDesc)}
@@ -143,27 +139,24 @@ const Diary = () => {
           editable={!isSaving}
           multiline
         />
-        </ContentWrapper>
-        <ButtomView>
-          <PhotoWrap>
-          <PhotoOfTheDay onPick={setImage} image={image} disabled={isSaving} />
-          </PhotoWrap>
-          <FinalButton onPress={saveToFb} disabled={isSaving}>
-            {isSaving && <ActivityIndicator size="small" color="gray" />}
-            <FinalButtonText>
-              {isSaved ? 'Save edited diary' : 'Save diary'}
-            </FinalButtonText>
-          </FinalButton>
-        </ButtomView>
+      </ContentWrapper>
+      <PhotoWrap>
+        <PhotoOfTheDay onPick={setImage} image={image} disabled={isSaving} />
+      </PhotoWrap>
+      <FinalButton onPress={saveToFb} disabled={isSaving}>
+        {isSaving && <ActivityIndicator size="small" color="gray" />}
+        <FinalButtonText>
+          {isSaved ? 'Save edited diary' : 'Save diary'}
+        </FinalButtonText>
+      </FinalButton>
     </>
   );
 };
 
-export default Diary;
-
 const ContentWrapper = styled.View`
   align-items: stretch;
   width: 70%;
+  margin-bottom: 20px;
 `;
 
 const TextContent = styled.Text`
@@ -173,49 +166,29 @@ const TextContent = styled.Text`
 `;
 
 const StoryDateContent = styled.View`
-  display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 20px;
 `;
 
-const FlexBox1 = styled.View`
-  display: flex;
-`;
-
-const FlexBox2 = styled.View`
-  display: flex;
-`;
-
 const SelfDescContent = styled.TextInput`
-  margin-bottom: 10px;
-  border: 1px gray;
+  border: 1px solid gray;
   padding: 5px;
   margin-bottom: 20px;
 `;
 
 const DiaryContent = styled.TextInput`
-  margin-bottom: 10px;
-  border: 1px gray;
+  border: 1px solid gray;
   height: 120px;
   padding: 5px;
-  margin-bottom: 20px;
-`;
-
-const ButtomView = styled.View`
-  display: flex;
-  flex-direction: column;
 `;
 
 const PhotoWrap = styled.View`
-justify-content: center;
-  display: flex;
-  flex-direction: row;
+  align-items: center;
 `;
 
 const FinalButton = styled.TouchableOpacity`
   justify-content: center;
-  display: flex;
   flex-direction: row;
 `;
 
@@ -225,3 +198,5 @@ const FinalButtonText = styled.Text`
   font-family: 'AmaticSC-Bold';
   margin: 20px;
 `;
+
+export default Diary;

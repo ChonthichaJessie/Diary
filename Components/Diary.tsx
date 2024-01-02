@@ -10,14 +10,19 @@ import styled from 'styled-components/native';
 type DiaryDoc = {
   date: string;
   content: string;
+  activity: string;
+  counting: number;
   self_description: string;
   photo_ref: string;
+  
 };
 
 const Diary = () => {
   const [date, setDate] = useState(new Date());
   const [selfDesc, setSelfDesc] = useState('');
+  const [activityList, setActivityList] = useState('');
   const [text, setText] = useState('');
+  const [countingAct, setCountingAct] = useState(0);
   const [image, setImage] = useState<Asset | undefined>();
   //Unchanging contents while saving diary
   const [isSaving, setIsSaving] = useState(false);
@@ -35,13 +40,15 @@ const Diary = () => {
       await firestore().collection<DiaryDoc>('diaries').doc(dateStr).set({
         date: dateStr,
         content: text,
+        activity: activityList,
+        counting: countingAct,
         self_description: selfDesc,
         photo_ref: imageRef.fullPath,
       });
       setIsSaving(false);
       setIsSaved(true);
     },
-    [date, text, selfDesc, dateStr],
+    [date, text, activityList, countingAct, selfDesc, dateStr],
   );
 
   const saveToFb = useCallback(async () => {
@@ -74,6 +81,8 @@ const Diary = () => {
   const reset = useCallback(() => {
     setText('');
     setSelfDesc('');
+    setActivityList('');
+    setCountingAct(0);
     setImage(undefined);
     setIsSaved(false);
     setIsSaving(false);
@@ -95,10 +104,12 @@ const Diary = () => {
       const imageUri = await storage().ref(oldDiary.photo_ref).getDownloadURL();
       setText(oldDiary.content);
       setSelfDesc(oldDiary.self_description);
+      setActivityList(oldDiary.activity);
+      setCountingAct(oldDiary.counting)
       setImage({uri: imageUri});
       setIsSaved(true);
     } catch (e) {
-      Alert.alert('Error saving');
+      Alert.alert('Error saving' + e);
       reset();
     }
     setIsSaving(false);
@@ -131,6 +142,13 @@ const Diary = () => {
           editable={!isSaving}
           placeholder="Self Descriptive for Today"
         />
+        <ActivityListContent
+          value={activityList}
+          onChangeText={activityList => setActivityList(activityList)}
+          //Unchanging contents while saving diary
+          editable={!isSaving}
+          placeholder="Memorable activities"
+        />
         <DiaryContent
           onChangeText={text => setText(text)}
           value={text}
@@ -138,6 +156,13 @@ const Diary = () => {
           //Unchanging contents while saving diary
           editable={!isSaving}
           multiline
+        />
+        <CountingActContent
+          value={countingAct}
+          onChangeText={countingAct => setCountingAct(countingAct)}
+          //Unchanging contents while saving diary
+          editable={!isSaving}
+          placeholder="Count you activities!!!"
         />
       </ContentWrapper>
       <PhotoWrap>
@@ -177,10 +202,24 @@ const SelfDescContent = styled.TextInput`
   margin-bottom: 20px;
 `;
 
+const CountingActContent = styled.TextInput`
+  border: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 20px;
+`;
+
+const ActivityListContent = styled.TextInput`
+  border: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 20px;
+`;
+
 const DiaryContent = styled.TextInput`
   border: 1px solid gray;
   height: 120px;
   padding: 5px;
+  margin-bottom: 20px;
+
 `;
 
 const PhotoWrap = styled.View`

@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Alert, ActivityIndicator, TouchableOpacity, Text} from 'react-native';
+import {Alert, ActivityIndicator} from 'react-native';
 import PhotoOfTheDay from './PhotoOfTheDay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import storage, {FirebaseStorageTypes} from '@react-native-firebase/storage';
 import {Asset} from 'react-native-image-picker';
 import styled from 'styled-components/native';
+import InputSpinner from 'react-native-input-spinner';
 
 type DiaryDoc = {
   date: string;
@@ -14,7 +15,6 @@ type DiaryDoc = {
   counting: number;
   self_description: string;
   photo_ref: string;
-  
 };
 
 const Diary = () => {
@@ -27,6 +27,54 @@ const Diary = () => {
   //Unchanging contents while saving diary
   const [isSaving, setIsSaving] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+
+  // //Notification
+  // const getCorrectDate = () => {
+  //   const date = new Date();
+  //   date.setDate(date.getDate() + 1);
+  //   date.setHours(10);
+  //   date.setMinutes(18);
+  //   return date;
+  // };
+
+  // useEffect(() => {
+  //   PushNotificationIOS.addNotificationRequest({
+  //     id: 'reminder',
+  //     title: 'Diary photo reminder',
+  //     body: 'Dont forget to take the best photo of the day for your diary',
+  //     fireDate: getCorrectDate(),
+  //     isSilent: true,
+  //     repeats: true,
+  //     repeatsComponent: {
+  //       hour: true,
+  //       minute: true,
+  //     },
+  //   });
+  // }, []);
+
+  // const onRemoteNotification = useCallback(
+  //   (notification: PushNotificationIOS) => {
+  //     // const isClicked = notification.getData().userInteraction === 1;
+
+  //     // if (isClicked) {
+  //     //   // Navigate user to another screen
+  //     // } else {
+  //     //   // Do something else with push notification
+  //     // }
+  //     // // Use the appropriate result based on what you needed to do for this notification
+  //     const result = PushNotificationIOS.FetchResult.NoData;
+  //     notification.finish(result);
+  //   },
+  //   [],
+  // );
+
+  // // useEffect(() => {
+  // //   const type = 'notification';
+  // //   PushNotificationIOS.addEventListener(type, onRemoteNotification);
+  // //   return () => {
+  // //     PushNotificationIOS.removeEventListener(type);
+  // //   };
+  // // }, [onRemoteNotification]);
 
   const dateStr = [
     date.getFullYear(),
@@ -51,6 +99,7 @@ const Diary = () => {
     [date, text, activityList, countingAct, selfDesc, dateStr],
   );
 
+  //Firebase photos
   const saveToFb = useCallback(async () => {
     if (!image?.uri) {
       // no image at all
@@ -94,6 +143,7 @@ const Diary = () => {
       .collection<DiaryDoc>('diaries')
       .doc(dateStr)
       .get();
+
     const oldDiary = oldDiaryEntry.data();
 
     if (!oldDiary) {
@@ -105,11 +155,11 @@ const Diary = () => {
       setText(oldDiary.content);
       setSelfDesc(oldDiary.self_description);
       setActivityList(oldDiary.activity);
-      setCountingAct(oldDiary.counting)
+      setCountingAct(oldDiary.counting);
       setImage({uri: imageUri});
       setIsSaved(true);
     } catch (e) {
-      Alert.alert('Error saving' + e);
+      Alert.alert('Error saving ' + e);
       reset();
     }
     setIsSaving(false);
@@ -157,12 +207,29 @@ const Diary = () => {
           editable={!isSaving}
           multiline
         />
-        <CountingActContent
+        {/* <CountingActContent
           value={countingAct}
           onChangeText={countingAct => setCountingAct(countingAct)}
           //Unchanging contents while saving diary
           editable={!isSaving}
           placeholder="Count you activities!!!"
+        /> */}
+
+        <InputSpinner
+          max={10}
+          min={0}
+          step={0.5}
+          type="real"
+          precision={1}
+          textColor="white"
+          color="#ccc8c8"
+          buttonTextColor="white"
+          buttonLeftText="🫰🏻"
+          buttonRightText="💗"
+          placeholder="Count your activities"
+          placeholderTextColor="white"
+          value={countingAct}
+          onChange={setCountingAct}
         />
       </ContentWrapper>
       <PhotoWrap>
@@ -219,7 +286,6 @@ const DiaryContent = styled.TextInput`
   height: 120px;
   padding: 5px;
   margin-bottom: 20px;
-
 `;
 
 const PhotoWrap = styled.View`

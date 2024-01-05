@@ -1181,6 +1181,10 @@ PODS:
     - React-jsi (= 0.72.7)
     - React-logger (= 0.72.7)
     - React-perflogger (= 0.72.7)
+  - RNCPicker (2.6.1):
+    - React-Core
+  - RNCPushNotificationIOS (1.11.0):
+    - React-Core
   - RNDateTimePicker (7.6.2):
     - React-Core
   - RNFBApp (18.7.1):
@@ -1195,6 +1199,11 @@ PODS:
     - Firebase/Storage (= 10.18.0)
     - React-Core
     - RNFBApp
+  - RNNotifee (7.8.2):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 7.8.2)
+  - RNNotifee/NotifeeCore (7.8.2):
+    - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
 
@@ -1240,10 +1249,13 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1351,6 +1363,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
   RNFBApp:
@@ -1359,6 +1375,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBStorage:
     :path: "../node_modules/@react-native-firebase/storage"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1423,10 +1441,13 @@ SPEC CHECKSUMS:
   React-runtimescheduler: b825f8f8193c2111e25381ce844d01c1c520994e
   React-utils: dc51e2c7c2e49d327b90771d8a7acc95918eb485
   ReactCommon: 4ef37cb61335f2c7a29225d754c06857b4cc6361
+  RNCPicker: b18aaf30df596e9b1738e7c1f9ee55402a229dca
+  RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
   RNDateTimePicker: fc2e4f2795877d45e84d85659bebe627eba5c931
   RNFBApp: 3d518e0ea7f945ae546facc0e6034806d9ddfde7
   RNFBFirestore: 8d1ebb9a5af12838a15c8e9572435daca761767f
   RNFBStorage: eb04ba6b6b5ac5db28df4a1d904496b61a95d6f7
+  RNNotifee: 8e2d3df3f0e9ce8f5d1fe4c967431138190b6175
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 4c3aa327e4a6a23eeacd71f61c81df1bcdf677d5
 

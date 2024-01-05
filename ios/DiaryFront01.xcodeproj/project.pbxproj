@@ -29,6 +29,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		ADD2D3D22B45D25700A6A232 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* DiaryFront01Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiaryFront01Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,6 +61,11 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DiaryFront01/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E7CD684E8D9B0DE3DAE5FC1 /* Pods_DiaryFront01_DiaryFront01Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiaryFront01_DiaryFront01Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADC7ACB92B1E966C009A2579 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ADD2D3C12B45D25700A6A232 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		ADD2D3C32B45D25700A6A232 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		ADD2D3C62B45D25700A6A232 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		ADD2D3C92B45D25700A6A232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		ADD2D3CB2B45D25700A6A232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0A9543A59524E2F9EB2E24C /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AmaticSC-Bold.ttf"; path = "../assets/fonts/AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -118,6 +136,8 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				4FDCBA179E992ED81FC5BEF9 /* Pods_DiaryFront01.framework */,
 				9E7CD684E8D9B0DE3DAE5FC1 /* Pods_DiaryFront01_DiaryFront01Tests.framework */,
+				ADD2D3C12B45D25700A6A232 /* UserNotifications.framework */,
+				ADD2D3C32B45D25700A6A232 /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,6 +155,7 @@
 				13B07FAE1A68108700A75B9A /* DiaryFront01 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* DiaryFront01Tests */,
+				ADD2D3C52B45D25700A6A232 /* notification */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -152,6 +173,16 @@
 				00E356EE1AD99517003FC87E /* DiaryFront01Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ADD2D3C52B45D25700A6A232 /* notification */ = {
+			isa = PBXGroup;
+			children = (
+				ADD2D3C62B45D25700A6A232 /* NotificationViewController.swift */,
+				ADD2D3C82B45D25700A6A232 /* MainInterface.storyboard */,
+				ADD2D3CB2B45D25700A6A232 /* Info.plist */,
+			);
+			path = notification;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -202,6 +233,7 @@
 				08029B0E6CE3FD2BD08023FB /* [CP] Embed Pods Frameworks */,
 				35191C4E3266B13C802D4D4E /* [CP] Copy Pods Resources */,
 				B79122EDB33D88F7A3356CE8 /* [CP-User] [RNFB] Core Configuration */,
+				ADD2D3D22B45D25700A6A232 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -219,6 +251,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -462,6 +495,17 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		ADD2D3C82B45D25700A6A232 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADD2D3C92B45D25700A6A232 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -520,6 +564,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33B388D8F484D3540FD58918 /* Pods-DiaryFront01.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -549,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BF5391686CE813024FB4211 /* Pods-DiaryFront01.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;

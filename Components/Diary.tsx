@@ -1,7 +1,15 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Alert, ActivityIndicator} from 'react-native';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  Alert,
+  ActivityIndicator,
+  Text,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import PhotoOfTheDay from './PhotoOfTheDay';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, {
+  DateTimePickerAndroid,
+} from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import storage, {FirebaseStorageTypes} from '@react-native-firebase/storage';
 import {Asset} from 'react-native-image-picker';
@@ -19,6 +27,7 @@ type DiaryDoc = {
 
 const Diary = () => {
   const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(true);
   const [selfDesc, setSelfDesc] = useState('');
   const [activityList, setActivityList] = useState('');
   const [text, setText] = useState('');
@@ -27,54 +36,6 @@ const Diary = () => {
   //Unchanging contents while saving diary
   const [isSaving, setIsSaving] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-
-  // //Notification
-  // const getCorrectDate = () => {
-  //   const date = new Date();
-  //   date.setDate(date.getDate() + 1);
-  //   date.setHours(10);
-  //   date.setMinutes(18);
-  //   return date;
-  // };
-
-  // useEffect(() => {
-  //   PushNotificationIOS.addNotificationRequest({
-  //     id: 'reminder',
-  //     title: 'Diary photo reminder',
-  //     body: 'Dont forget to take the best photo of the day for your diary',
-  //     fireDate: getCorrectDate(),
-  //     isSilent: true,
-  //     repeats: true,
-  //     repeatsComponent: {
-  //       hour: true,
-  //       minute: true,
-  //     },
-  //   });
-  // }, []);
-
-  // const onRemoteNotification = useCallback(
-  //   (notification: PushNotificationIOS) => {
-  //     // const isClicked = notification.getData().userInteraction === 1;
-
-  //     // if (isClicked) {
-  //     //   // Navigate user to another screen
-  //     // } else {
-  //     //   // Do something else with push notification
-  //     // }
-  //     // // Use the appropriate result based on what you needed to do for this notification
-  //     const result = PushNotificationIOS.FetchResult.NoData;
-  //     notification.finish(result);
-  //   },
-  //   [],
-  // );
-
-  // // useEffect(() => {
-  // //   const type = 'notification';
-  // //   PushNotificationIOS.addEventListener(type, onRemoteNotification);
-  // //   return () => {
-  // //     PushNotificationIOS.removeEventListener(type);
-  // //   };
-  // // }, [onRemoteNotification]);
 
   const dateStr = [
     date.getFullYear(),
@@ -169,19 +130,55 @@ const Diary = () => {
     checkOldDiary();
   }, [checkOldDiary]);
 
+  const onDateChange = useCallback(
+    (_: unknown, updated?: Date) => {
+      if (Platform.OS === 'android') {
+        DateTimePickerAndroid.dismiss('date');
+      }
+      if (!updated) {
+        return;
+      }
+      if (
+        updated.getFullYear() === date.getFullYear() &&
+        updated.getMonth() === date.getMonth() &&
+        updated.getDate() === date.getDate()
+      ) {
+        return;
+      }
+      setDate(updated);
+    },
+    [date],
+  );
+
   return (
     <>
       <StoryDateContent>
         <TextContent>Story date</TextContent>
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode="date"
-          is24Hour
-          //Unchanging contents while saving diary
-          disabled={isSaving}
-          onChange={e => setDate(new Date(e.nativeEvent.timestamp))}
-        />
+        {Platform.OS === 'ios' ? (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour
+            //Unchanging contents while saving diary
+            disabled={isSaving}
+            onChange={onDateChange}
+          />
+        ) : (
+          <TouchableOpacity
+            onPress={() =>
+              DateTimePickerAndroid.open({
+                testID: 'dateTimePicker',
+                value: date,
+                mode: 'date',
+                is24Hour: true,
+                //Unchanging contents while saving diary
+                onChange: onDateChange,
+              })
+            }>
+            <Text>{dateStr}</Text>
+          </TouchableOpacity>
+        )}
       </StoryDateContent>
 
       <ContentWrapper>
